@@ -110,10 +110,10 @@ function Formulario() {
                 id="telefone"
                 placeholder="Digite o seu telefone"
                 {...formik.getFieldProps("telefone")}
-                />
-                {formik.touched.telefone && formik.errors.telefone && (
-                  <div className="text-danger">{formik.errors.telefone}</div>
-                )}
+              />
+              {formik.touched.telefone && formik.errors.telefone && (
+                <div className="text-danger">{formik.errors.telefone}</div>
+              )}
             </Form.Group>
             {/* Número de adultos */}
             <Form.Group className="col-12 mb-1">

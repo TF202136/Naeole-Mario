@@ -23,7 +23,7 @@ const Navigation: React.FC = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <NavLink href="#action1">Home</NavLink>
+            <NavLink href="/">Home</NavLink>
             <NavLink href="#action2">Link</NavLink>
             <NavLink href="#" disabled>
               Link

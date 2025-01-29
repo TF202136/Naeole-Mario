@@ -1,0 +1,15 @@
+body {
+    font-family: sans-serif; /* Set a default font for the body */
+  }
+  
+  h1,
+  h2,
+  p,
+  nav,
+  form {
+    font-family: "Playfair Display", serif; /* For headings and other elements */
+  }
+  
+  button {
+    all: unset; /* Resets all styles, making the button unstyled */
+  }
