@@ -1,0 +1,11 @@
+#btn-1 {
+    color: rgb(226, 182, 117);
+    border-color: #cfb7a6;
+    font-family: "Playfair Display", serif; /* For headings */
+
+  }
+  #btn-1:hover {
+    color: brown;
+    border-color: #ffff;
+    background-color: blanchedalmond;
+  }

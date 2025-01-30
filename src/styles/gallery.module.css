@@ -1,0 +1,69 @@
+.gallery {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .imageContainer {
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .imageContainer:hover {
+    transform: scale(1.05);
+  }
+  
+  .galleryImage {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loadMore {
+    background: #ff4081;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .loadMore:hover {
+    background: #e00067;
+  }
+  
+  .progressBar {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .progressFill {
+    height: 100%;
+    background: #ff4081;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  
+  /* 🔥 Responsividade */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+  
