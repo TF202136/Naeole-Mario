@@ -1,0 +1,52 @@
+.countdown {
+  position: absolute;
+  bottom: 40px; /* Ajusta a posição abaixo da Hero Section */
+  left: 0;
+  width: 100%; /* 🔥 Garante que cubra toda a largura */
+  background: rgba(228, 226, 226, ); /* 🔥 Fundo escuro semi-transparente */
+  color: rgb(255, 208, 208);
+  padding: 15px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.p  {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: beige;
+}
+
+.timer {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* 🔥 Garante centralização horizontal */
+  flex-wrap: wrap; /* 🔥 Permite quebra de linha para telas menores */
+}
+
+.timer div {
+  text-align: center;
+  min-width: 80px; /* 🔥 Mantém os blocos alinhados */
+}
+
+.timer span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: block;
+}
+
+/* 🔥 Responsividade */
+@media (max-width: 768px) {
+  .timer {
+    gap: 10px; /* Reduz espaço entre os itens */
+  }
+
+  .timer span {
+    font-size: 2rem; /* Reduz tamanho do texto em telas menores */
+  }
+
+  .countdown {
+    padding: 10px 0;
+  }
+}

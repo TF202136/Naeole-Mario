@@ -1,9 +1,11 @@
 import Button from "react-bootstrap/Button";
 import "../styles/page.css";
+import "../styles/countdown.module.css";
+import Countdown from "./components/countdown/countdown";
 
 export default function HomePage() {
   return (
-    <div id="hero">
+    <main id="hero">
       <section>
         <div className="d-flex justify-content-center align-items-center vh-100">
           <div className="hero-overlay text-center">
@@ -13,15 +15,26 @@ export default function HomePage() {
                 dia especial
               </span>{" "}
             </h1>
-            <p> Estamos muito felizes em compartilhar esse momento com vocês</p>{" "}
+            <p> Estamos muito felizes em compartilhar esse momento connvosco</p>{" "}
             <div>
               <Button variant="outline-primary" id="btn-1" href="/formulario">
                 Confirme a sua presença
               </Button>
+              
             </div>
           </div>
         </div>
+        <Countdown />
       </section>
-    </div>
+      {/* countdown section */}
+
+     
+        
+   
+
+   </main>
+
+
+
   );
 }
