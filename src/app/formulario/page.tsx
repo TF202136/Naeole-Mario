@@ -6,10 +6,20 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useFormikValidation } from "../../hooks/useFormikValidation";
+import { addDoc, convidadosRef } from "@/lib/firebase/config";
+import { useState } from "react";
+import { Alert, Button } from "react-bootstrap";
 
 function Formulario() {
-  const formik = useFormikValidation((values) => {
-    alert(JSON.stringify(values, null, 2));
+  const [success, setSuccess] = useState(false);
+
+  const formik = useFormikValidation(async (values) => {
+    try {
+      await addDoc(convidadosRef, values);
+      setSuccess(true);
+    } catch (error) {
+      console.error("Erro ao salvar:", error);
+    }
   });
 
   return (
@@ -117,7 +127,7 @@ function Formulario() {
             </Form.Group>
             {/* Número de adultos */}
             <Form.Group className="col-12 mb-1">
-              <Form.Label>Número de adultos</Form.Label>
+              <Form.Label>Acompanhante</Form.Label>
               <Form.Control
                 type="number"
                 id="adultos"
@@ -170,9 +180,9 @@ function Formulario() {
             </Form.Group>
             {/* Botão de envio */}
             <Form.Group className="col-12">
-              <button type="submit" className="btn btn-primary">
+              <Button type="submit" className="btn btn-primary">
                 Enviar
-              </button>
+              </Button>
             </Form.Group>
           </Form>
         </div>

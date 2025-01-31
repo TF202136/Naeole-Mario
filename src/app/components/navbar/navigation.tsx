@@ -29,7 +29,7 @@ const Navigation: React.FC = () => {
             <NavLink href="/info">Informações do casamento</NavLink>
           </Nav>
           <Nav className="d-flex">
-            <Button href="admin" variant="outline-primary" id="btn-1" >Admin</Button>
+            <Button href="/admin/login" variant="outline-primary" id="btn-1" >Admin</Button>
           </Nav>
         </NavbarCollapse>
       </Container>

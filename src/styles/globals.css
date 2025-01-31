@@ -1,5 +1,9 @@
 body {
-    font-family: sans-serif; /* Set a default font for the body */
+    font-family: "Playfair Display", serif; /* Set a default font for the body */
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/naeolemariowedding.firebasestorage.app/o/Nae%26Mario%2Fwedding-background.jpg?alt=media&token=a367d0b6-4f2d-4ef3-a927-eef2098ff034");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
   }
   
   h1,

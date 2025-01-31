@@ -1,8 +1,9 @@
-'client use';
+"client use";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,10 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${roboto.className}`}
-      >
-        {children}
+      <body className={`${roboto.className}`}>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

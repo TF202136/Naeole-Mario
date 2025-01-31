@@ -20,21 +20,14 @@ export default function HomePage() {
               <Button variant="outline-primary" id="btn-1" href="/formulario">
                 Confirme a sua presença
               </Button>
-              
             </div>
           </div>
         </div>
-        <Countdown />
+        <article>
+          <Countdown />
+        </article>
       </section>
       {/* countdown section */}
-
-     
-        
-   
-
-   </main>
-
-
-
+    </main>
   );
 }

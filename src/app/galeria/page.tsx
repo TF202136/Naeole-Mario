@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Container, Row, Col, Spinner } from "react-bootstrap";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
 import styles from "../../styles/gallery.module.css";
 import { fotos } from "../components/images/fotos"; // Importa as fotos separadas
 import Navigation from "../components/navbar/navigation";
@@ -95,15 +93,6 @@ const Gallery: React.FC = () => {
               style={{ width: `${((photoIndex + 1) / fotos.length) * 100}%` }}
             ></div>
           </div>
-
-          <Lightbox
-            mainSrc={fotos[photoIndex].src}
-            nextSrc={fotos[(photoIndex + 1) % fotos.length].src}
-            prevSrc={fotos[(photoIndex + fotos.length - 1) % fotos.length].src}
-            onCloseRequest={() => setIsOpen(false)}
-            onMovePrevRequest={() => setPhotoIndex((photoIndex + fotos.length - 1) % fotos.length)}
-            onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % fotos.length)}
-          />
         </>
       )}
     </Container>
