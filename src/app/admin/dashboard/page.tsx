@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { collection, getDocs, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/config";
-import { Button, Table, Container, Alert, Modal, Form } from "react-bootstrap";
+import { Button, Table, Container, Modal, Form } from "react-bootstrap";
+import styles from "../../../styles/dashboard.module.css"; // Importe o arquivo de estilos
 
 interface Convidado {
   id: string;
@@ -38,20 +39,20 @@ const Dashboard = () => {
 
   const handleEdit = async () => {
     if (selectedConvidado) {
-      await updateDoc(doc(db, "convidados", selectedConvidado.id), {...selectedConvidado});
+      await updateDoc(doc(db, "convidados", selectedConvidado.id), { ...selectedConvidado });
       setShowModal(false);
       setSelectedConvidado(null);
     }
   };
 
   return (
-    <Container className="mt-5">
-      <h2>Dashboard dos Noivos</h2>
-      <Button variant="danger" onClick={() => auth.signOut()}>
+    <Container className={`mt-5 ${styles.dashboardContainer}`}>
+      <h2 className={styles.dashboardTitle}>Dashboard dos Noivos</h2>
+      <Button variant="danger" onClick={() => auth.signOut()} className={styles.logoutButton}>
         Sair
       </Button>
 
-      <Table striped bordered hover>
+      <Table striped bordered hover className={styles.convidadosTable}>
         <thead>
           <tr>
             <th>Nome</th>
@@ -73,11 +74,22 @@ const Dashboard = () => {
               <td>{c.acompanhante}</td>
               <td>{c.mensagem}</td>
               <td>
-                <Button size="sm" onClick={() => {
-                  setSelectedConvidado(c);
-                  setShowModal(true);
-                }}>Editar</Button>
-                <Button variant="danger" size="sm" onClick={() => handleDelete(c.id)}>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    setSelectedConvidado(c);
+                    setShowModal(true);
+                  }}
+                  className={styles.editButton}
+                >
+                  Editar
+                </Button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => handleDelete(c.id)}
+                  className={styles.deleteButton}
+                >
                   Remover
                 </Button>
               </td>
@@ -93,8 +105,60 @@ const Dashboard = () => {
         </Modal.Header>
         <Modal.Body>
           {selectedConvidado && (
-            <>
-              <Form.Group>
+            <Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Nome</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={selectedConvidado.nome}
+                  onChange={(e) =>
+                    setSelectedConvidado({
+                      ...selectedConvidado,
+                      nome: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Sobrenome</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={selectedConvidado.sobrenome}
+                  onChange={(e) =>
+                    setSelectedConvidado({
+                      ...selectedConvidado,
+                      sobrenome: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={selectedConvidado.email}
+                  onChange={(e) =>
+                    setSelectedConvidado({
+                      ...selectedConvidado,
+                      email: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Telefone</Form.Label>
+                <Form.Control
+                  type="number"
+                  value={selectedConvidado.telefone}
+                  onChange={(e) =>
+                    setSelectedConvidado({
+                      ...selectedConvidado,
+                      telefone: Number(e.target.value),
+                    })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
                 <Form.Label>Acompanhantes</Form.Label>
                 <Form.Control
                   type="number"
@@ -107,8 +171,23 @@ const Dashboard = () => {
                   }
                 />
               </Form.Group>
-              <Button onClick={handleEdit}>Salvar</Button>
-            </>
+              <Form.Group className="mb-3">
+                <Form.Label>Mensagem</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={selectedConvidado.mensagem || ''}
+                  onChange={(e) =>
+                    setSelectedConvidado({
+                      ...selectedConvidado,
+                      mensagem: e.target.value,
+                    })
+                  }
+                />
+              </Form.Group>
+              <Button onClick={handleEdit} className={styles.saveButton}>
+                Salvar
+              </Button>
+            </Form>
           )}
         </Modal.Body>
       </Modal>

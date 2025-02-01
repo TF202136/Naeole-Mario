@@ -35,7 +35,7 @@ function Formulario() {
   return (
     <div>
       <header>
-        <div className="container">
+        <div>
           <Navigation />
         </div>
         <h1 className="text-center mt-5">Formulário de Comparência</h1>

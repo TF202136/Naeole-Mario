@@ -13,6 +13,11 @@ interface TimeLeft {
 
 const calculateTimeLeft = (targetDate: string): TimeLeft => {
   const difference = +new Date(targetDate) - +new Date();
+
+  if (difference <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 }; // Retorna 0 se a data já passou
+  }
+
   return {
     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -27,11 +32,17 @@ export default function Countdown() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(weddingDate));
+      const newTimeLeft = calculateTimeLeft(weddingDate);
+      setTimeLeft(newTimeLeft);
+
+      // Para o timer quando o tempo acabar
+      if (newTimeLeft.days <= 0 && newTimeLeft.hours <= 0 && newTimeLeft.minutes <= 0 && newTimeLeft.seconds <= 0) {
+        clearInterval(timer);
+      }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [weddingDate]);
 
   return (
     <motion.div
@@ -60,4 +71,4 @@ export default function Countdown() {
       </div>
     </motion.div>
   );
-}
+};

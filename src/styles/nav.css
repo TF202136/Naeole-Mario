@@ -1,11 +1,69 @@
-#btn-1 {
-    color: rgb(226, 182, 117);
-    border-color: #cfb7a6;
-    font-family: "Playfair Display", serif; /* For headings */
+/* Estilos gerais para a Navbar */
+.navbar {
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333 !important;
+}
+
+.navbar-brand span {
+  color: rgb(237, 190, 119);
+}
+
+/* Estilos para os links da Navbar */
+.nav-link {
+  color: #333 !important;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Efeito hover */
+.nav-link:hover {
+  color: rgb(237, 190, 119) !important;
+  background-color: rgba(237, 190, 119, 0.1);
+  border-radius: 4px;
+}
+
+/* Classe is-active para o link ativo */
+.nav-link.is-active {
+  color: rgb(237, 190, 119) !important;
+  font-weight: bold;
+  border-bottom: 2px solid rgb(237, 190, 119);
+}
+
+/* Estilos para o botão Admin */
+#btn-1 {
+  border-color: rgb(237, 190, 119);
+  color: rgb(237, 190, 119);
+  transition: all 0.3s ease;
+}
+
+#btn-1:hover {
+  background-color: rgb(237, 190, 119);
+  color: #fff;
+}
+
+/* Estilos para telas pequenas (mobile) */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    background-color: #f8f9fa; /* Fundo claro para o menu recolhido */
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
   }
-  #btn-1:hover {
-    color: brown;
-    border-color: #ffff;
-    background-color: blanchedalmond;
+
+  .nav-link {
+    margin: 0.5rem 0; /* Aumentar o espaçamento entre links */
   }
+
+  #btn-1 {
+    width: 100%; /* Botão ocupa toda a largura */
+    margin-top: 1rem;
+  }
+}

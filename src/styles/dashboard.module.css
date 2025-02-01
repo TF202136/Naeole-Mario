@@ -1,0 +1,81 @@
+/* Estilos para o container principal */
+.dashboardContainer {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para o título */
+  .dashboardTitle {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  /* Estilos para o botão de logout */
+  .logoutButton {
+    margin-bottom: 20px;
+    background-color: #ef3f50;
+    border-color: #f47885;
+  }
+  
+  /* Estilos para a tabela */
+  .convidadosTable {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .convidadosTable th {
+    background-color: #e8d6b1;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .convidadosTable td {
+    vertical-align: middle;
+  }
+  
+  /* Estilos para os botões de ação */
+  .editButton {
+    margin-right: 8px;
+  }
+  
+  .deleteButton {
+    background-color:  #ef3f50;
+    border-color: #f47885;
+  }
+  
+  .deleteButton:hover {
+    background-color:  #ef3f50;
+    border-color: #f47885;
+  }
+  
+  /* Estilos para o modal */
+  .modal-content {
+    border-radius: 8px;
+  }
+  
+  .modal-header {
+    background-color: #f47885;
+    color: black;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+  }
+  
+  /* Estilos para o botão de salvar no modal */
+  .saveButton {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .saveButton:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
