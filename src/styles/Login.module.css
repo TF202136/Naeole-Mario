@@ -1,0 +1,61 @@
+/* Estilos para o container principal */
+.loginContainer {
+    background-color: #f8f9fa;
+  }
+  
+  /* Estilos para a caixa de login */
+  .loginBox {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Estilos para o título */
+  .loginTitle {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Estilos para o alerta de erro */
+  .alert {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Estilos para o botão de login */
+  .loginButton {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-weight: bold;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .loginButton:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  
+  .loginButton:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* Estilos para os inputs */
+  .form-control {
+    border-radius: 4px;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  

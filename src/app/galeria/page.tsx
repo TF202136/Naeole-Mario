@@ -13,6 +13,9 @@ const Gallery: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  // URL do vídeo (substitua pelo seu)
+  const videoSrc = "https://firebasestorage.googleapis.com/v0/b/naeolemariowedding.firebasestorage.app/o/Nae%26Mario%2Fvideo_do_casamento%20(1).mp4?alt=media&token=aa61db07-bdbe-4690-a110-df5b2555f693";
+
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1500);
   }, []);
@@ -31,13 +34,17 @@ const Gallery: React.FC = () => {
 
   const nextPhoto = () => {
     if (selectedIndex !== null) {
-      setSelectedIndex((prev) => (prev !== null ? (prev + 1) % fotos.length : 0));
+      setSelectedIndex((prev) =>
+        prev !== null ? (prev + 1) % fotos.length : 0
+      );
     }
   };
 
   const prevPhoto = () => {
     if (selectedIndex !== null) {
-      setSelectedIndex((prev) => (prev !== null ? (prev - 1 + fotos.length) % fotos.length : fotos.length - 1));
+      setSelectedIndex((prev) =>
+        prev !== null ? (prev - 1 + fotos.length) % fotos.length : fotos.length - 1
+      );
     }
   };
 
@@ -46,6 +53,21 @@ const Gallery: React.FC = () => {
       <Navigation />
       <Container className={styles.gallery}>
         <h2 className={styles.title}>Sessão de fotos pré-casamento</h2>
+
+        {/* Seção de vídeo */}
+        <div className={styles.videoContainer}>
+          <video
+            controls
+            width="100%"
+            className={styles.videoPlayer}
+            poster="https://firebasestorage.googleapis.com/v0/b/naeolemariowedding.firebasestorage.app/o/Nae%26Mario%2Fmaos_dadas.JPG?alt=media&token=43991fa3-40e1-4713-881c-69cd6501d2d9"  // Opcional: substitua pelo caminho do seu poster
+            loop // Adicione o atributo loop para reprodução contínua
+            autoPlay // Adicione o atributo autoPlay para reprodução automática
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Seu navegador não suporta a exibição de vídeos.
+          </video>
+        </div>
 
         {isLoading ? (
           <div className="text-center">
@@ -92,11 +114,9 @@ const Gallery: React.FC = () => {
             <button className={styles.closeButton} onClick={closePhoto}>
               <X size={30} />
             </button>
-
             <button className={styles.prevButton} onClick={prevPhoto}>
               <ChevronLeft size={40} />
             </button>
-
             <div className={styles.lightboxImageContainer}>
               <Image
                 src={fotos[selectedIndex].src}
@@ -107,7 +127,6 @@ const Gallery: React.FC = () => {
                 className="img-fluid"
               />
             </div>
-
             <button className={styles.nextButton} onClick={nextPhoto}>
               <ChevronRight size={40} />
             </button>

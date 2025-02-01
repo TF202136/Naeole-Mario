@@ -101,7 +101,15 @@
     top: 20px;
     right: 20px;
   }
+  .videoContainer {
+    margin-bottom: 2rem;
+  }
   
+  .videoPlayer {
+    max-width: 100%;
+    border-radius: 10px;
+    height: auto;
+  }
   
   /* 🔥 Responsividade */
   @media (max-width: 768px) {

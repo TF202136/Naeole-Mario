@@ -9,7 +9,7 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: "400",
 });
-
+  
 export const metadata: Metadata = {
   title: "Naeole & Mario",
   description: "Um local incrível para o casamento de Naeole e Mario!",

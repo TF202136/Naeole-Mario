@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { collection, getDocs, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, onSnapshot, updateDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase/config";
 import { Button, Table, Container, Modal, Form } from "react-bootstrap";
 import styles from "../../../styles/dashboard.module.css"; // Importe o arquivo de estilos
@@ -18,7 +18,7 @@ interface Convidado {
 }
 
 const Dashboard = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const [convidados, setConvidados] = useState<Convidado[]>([]);
   const [selectedConvidado, setSelectedConvidado] = useState<Convidado | null>(null);
   const [showModal, setShowModal] = useState(false);
