@@ -1,7 +1,6 @@
 
 import Button from "react-bootstrap/Button";
 import "../styles/page.css";
-import "../styles/countdown.module.css";
 import Countdown from "./components/countdown/countdown";
 
 export default function HomePage() {
@@ -11,7 +10,7 @@ export default function HomePage() {
         <div className="d-flex justify-content-center align-items-center vh-100">
           <div className="hero-overlay text-center">
             <h1>
-              Sejam bem-vindos ao nosso <span id="span1">dia especial</span>
+              Sejam bem-vindos ao nosso  dia especial
             </h1>
             <p>Estamos muito felizes em compartilhar esse momento com vocês</p>
             <div>
