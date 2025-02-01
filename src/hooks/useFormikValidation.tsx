@@ -5,6 +5,7 @@ import { YupValidationSchema } from './useYupValidation';
 export const useFormikValidation = (onSubmit: (values: any) => void) => {
     const formik = useFormik({
         initialValues: {
+        comparecer: '',
         nome: '',
         sobrenome: '',
         email: '',
