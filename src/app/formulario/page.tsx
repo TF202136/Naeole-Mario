@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Navigation from "../components/navbar/navigation";
 import Col from "react-bootstrap/Col";
@@ -46,7 +45,7 @@ function Formulario() {
       <article>
         <div className="container mt-5">
           {success && <Alert variant="success">Obrigado por confirmar!</Alert>}
-          
+
           <Form
             className="row g-3 shadow p-3 mb-5 bg-body-tertiary rounded"
             method="POST"
@@ -57,11 +56,17 @@ function Formulario() {
               <Row>
                 <Col>
                   <Form.Label>Primeiro Nome</Form.Label>
-                  <Form.Control {...formik.getFieldProps("nome")} />
+                  <Form.Control
+                    {...formik.getFieldProps("nome")}
+                    value={formik.values.nome || ""}
+                  />
                 </Col>
                 <Col>
                   <Form.Label>Sobrenome</Form.Label>
-                  <Form.Control {...formik.getFieldProps("sobrenome")} />
+                  <Form.Control
+                    {...formik.getFieldProps("sobrenome")}
+                    value={formik.values.sobrenome || ""}
+                  />
                 </Col>
               </Row>
             </Form.Group>
@@ -71,14 +76,20 @@ function Formulario() {
               <Form.Label>Email</Form.Label>
               <InputGroup>
                 <InputGroup.Text>@</InputGroup.Text>
-                <Form.Control {...formik.getFieldProps("email")} />
+                <Form.Control
+                  {...formik.getFieldProps("email")}
+                  value={formik.values.email || ""}
+                />
               </InputGroup>
             </Form.Group>
 
             {/* Telefone */}
             <Form.Group className="col-12 mb-1">
               <Form.Label>Telefone</Form.Label>
-              <Form.Control {...formik.getFieldProps("telefone")} />
+              <Form.Control
+                {...formik.getFieldProps("telefone")}
+                value={formik.values.telefone || ""}
+              />
             </Form.Group>
 
             {/* Acompanhantes */}
@@ -89,13 +100,18 @@ function Formulario() {
                 min={0}
                 max={5}
                 {...formik.getFieldProps("acompanhante")}
+                value={formik.values.acompanhante ?? 0}
               />
             </Form.Group>
 
             {/* Mensagem */}
             <Form.Group className="col-12 mb-1">
               <Form.Label>Mensagem</Form.Label>
-              <Form.Control as="textarea" {...formik.getFieldProps("mensagem")} />
+              <Form.Control
+                as="textarea"
+                {...formik.getFieldProps("mensagem")}
+                value={formik.values.mensagem || ""}
+              />
             </Form.Group>
 
             {/* Botão de envio */}
