@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword, auth } from "../../../lib/firebase/config";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Form, Button, Alert, Container } from "react-bootstrap";
 import styles from "../../../styles/Login.module.css"; //importe o arquivo de estilos
 
@@ -31,6 +31,7 @@ const Login = () => {
       }
 
       // Caso não seja o admin predefinido, tenta autenticar pelo Firebase
+      const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
       localStorage.setItem("adminLoggedIn", "true");
       router.push("/admin/dashboard");

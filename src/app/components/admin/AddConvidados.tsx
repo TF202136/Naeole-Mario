@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
-import { addDoc, convidadosRef } from "../../../lib/firebase/config";
+import { getFirestore, collection } from "firebase/firestore";
+import { useEffect } from "react";
+
+const db = getFirestore();
+const convidadosRef = collection(db, "convidados");
+import { addDoc } from "firebase/firestore";
 import { Form, Button, Alert } from "react-bootstrap";
 
 const AddConvidado = ({ onAdd }: { onAdd: () => void }) => {

@@ -24,6 +24,10 @@ const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    if (!db) {
+      console.error("Firestore is not initialized");
+      return;
+    }
     const unsubscribe = onSnapshot(collection(db, "convidados"), (snapshot) => {
       setConvidados(
         snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as Convidado))
@@ -34,12 +38,20 @@ const Dashboard = () => {
   }, []);
 
   const handleDelete = async (id: string) => {
-    await deleteDoc(doc(db, "convidados", id));
+    if (db) {
+      await deleteDoc(doc(db, "convidados", id));
+    } else {
+      console.error("Firestore is not initialized");
+    }
   };
 
   const handleEdit = async () => {
     if (selectedConvidado) {
-      await updateDoc(doc(db, "convidados", selectedConvidado.id), { ...selectedConvidado });
+      if (db) {
+        await updateDoc(doc(db, "convidados", selectedConvidado.id), { ...selectedConvidado });
+      } else {
+        console.error("Firestore is not initialized");
+      }
       setShowModal(false);
       setSelectedConvidado(null);
     }
@@ -48,7 +60,7 @@ const Dashboard = () => {
   return (
     <Container className={`mt-5 ${styles.dashboardContainer}`}>
       <h2 className={styles.dashboardTitle}>Dashboard dos Noivos</h2>
-      <Button variant="danger" onClick={() => auth.signOut()} className={styles.logoutButton}>
+      <Button variant="danger" onClick={() => auth?.signOut()} className={styles.logoutButton}>
         Sair
       </Button>
 
