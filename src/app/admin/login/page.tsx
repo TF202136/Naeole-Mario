@@ -7,8 +7,8 @@ import { Form, Button, Alert, Container } from "react-bootstrap";
 import styles from "../../../styles/Login.module.css"; //importe o arquivo de estilos
 
 // Credenciais predefinidas
-const ADMIN_EMAIL = "teste@email.com";
-const ADMIN_PASSWORD = "casamento2025";
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
 
 const Login = () => {
   const router = useRouter();
