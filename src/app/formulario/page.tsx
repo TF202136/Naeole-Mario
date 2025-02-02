@@ -7,7 +7,14 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useFormikValidation } from "../../hooks/useFormikValidation";
-import { addDoc, convidadosRef } from "@/lib/firebase/config";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { app } from "../../lib/firebase/config";
+
+if (!app) {
+  throw new Error("Firebase app initialization failed");
+}
+const db = getFirestore(app);
+const convidadosRef = collection(db, "convidados");
 import { Alert, Button } from "react-bootstrap";
 
 function Formulario() {
