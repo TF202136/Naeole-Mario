@@ -1,4 +1,9 @@
+// /src/app/formulario/page.tsx
+
 "use client";
+
+// Force dynamic rendering (disable prerendering)
+export const dynamic = "force-dynamic";
 
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
@@ -11,8 +16,11 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../lib/firebase/config";
 import { Alert, Button, Container } from "react-bootstrap";
 
-// Initialize the reference for the "convidados" collection
-const convidadosRef = collection(db!, "convidados");
+// If Firestore is not initialized, throw an error
+if (!db) {
+  throw new Error("Firestore initialization failed");
+}
+const convidadosRef = collection(db, "convidados");
 
 function Formulario() {
   const [success, setSuccess] = useState(false);
@@ -23,8 +31,11 @@ function Formulario() {
         ...values,
         acompanhante: values.acompanhante ?? 0, // Ensure a number is stored
       });
+
       setSuccess(true);
       resetForm(); // Reset the form fields
+
+      // Remove success alert after 3 seconds
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
