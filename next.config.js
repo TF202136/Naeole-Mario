@@ -1,5 +1,8 @@
-// next.config.js (NEW - Using remotePatterns)
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
@@ -22,3 +25,5 @@ module.exports = {
     minimumCacheTTL: 3600,
   },
 };
+
+module.exports = nextConfig;
