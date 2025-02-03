@@ -8,14 +8,17 @@ import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useFormikValidation } from "../../hooks/useFormikValidation";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { app } from "../../lib/firebase/config";
+import { app, db } from "../../lib/firebase/config";
+import { Alert, Button, Container } from "react-bootstrap";
 
 if (!app) {
   throw new Error("Firebase app initialization failed");
 }
-const db = getFirestore(app);
+
+if (!db) {
+  throw new Error("Firestore initialization failed");
+}
 const convidadosRef = collection(db, "convidados");
-import { Alert, Button } from "react-bootstrap";
 
 function Formulario() {
   const [success, setSuccess] = useState(false);
@@ -41,95 +44,81 @@ function Formulario() {
 
   return (
     <div>
-      <header>
-        <div>
-          <Navigation />
-        </div>
-        <h1 className="text-center mt-5">Formulário de Comparência</h1>
-        <p className="text-center mt-3">Agradecemos a sua presença!</p>
-      </header>
-
-      <article>
-        <div className="container mt-5">
-          {success && <Alert variant="success">Obrigado por confirmar!</Alert>}
-
-          <Form
-            className="row g-3 shadow p-3 mb-5 bg-body-tertiary rounded"
-            method="POST"
-            onSubmit={formik.handleSubmit}
-          >
-            {/* Nome e Sobrenome */}
-            <Form.Group className="col-12 mb-1">
-              <Row>
-                <Col>
-                  <Form.Label>Primeiro Nome</Form.Label>
-                  <Form.Control
-                    {...formik.getFieldProps("nome")}
-                    value={formik.values.nome || ""}
-                  />
-                </Col>
-                <Col>
-                  <Form.Label>Sobrenome</Form.Label>
-                  <Form.Control
-                    {...formik.getFieldProps("sobrenome")}
-                    value={formik.values.sobrenome || ""}
-                  />
-                </Col>
-              </Row>
-            </Form.Group>
-
-            {/* Email */}
-            <Form.Group as={Col} md="12">
-              <Form.Label>Email</Form.Label>
-              <InputGroup>
-                <InputGroup.Text>@</InputGroup.Text>
+      <Navigation />
+      <Container>
+        {success && <Alert variant="success">Convidado adicionado com sucesso!</Alert>}
+        <Form onSubmit={formik.handleSubmit}>
+          {/* Nome e Sobrenome */}
+          <Form.Group className="col-12 mb-1">
+            <Row>
+              <Col>
+                <Form.Label>Primeiro Nome</Form.Label>
                 <Form.Control
-                  {...formik.getFieldProps("email")}
-                  value={formik.values.email || ""}
+                  {...formik.getFieldProps("nome")}
+                  value={formik.values.nome || ""}
                 />
-              </InputGroup>
-            </Form.Group>
+              </Col>
+              <Col>
+                <Form.Label>Sobrenome</Form.Label>
+                <Form.Control
+                  {...formik.getFieldProps("sobrenome")}
+                  value={formik.values.sobrenome || ""}
+                />
+              </Col>
+            </Row>
+          </Form.Group>
 
-            {/* Telefone */}
-            <Form.Group className="col-12 mb-1">
-              <Form.Label>Telefone</Form.Label>
+          {/* Email */}
+          <Form.Group as={Col} md="12">
+            <Form.Label>Email</Form.Label>
+            <InputGroup>
+              <InputGroup.Text>@</InputGroup.Text>
               <Form.Control
-                {...formik.getFieldProps("telefone")}
-                value={formik.values.telefone || ""}
+                {...formik.getFieldProps("email")}
+                value={formik.values.email || ""}
               />
-            </Form.Group>
+            </InputGroup>
+          </Form.Group>
 
-            {/* Acompanhantes */}
-            <Form.Group className="col-12 mb-1">
-              <Form.Label>Acompanhantes</Form.Label>
-              <Form.Control
-                type="number"
-                min={0}
-                max={5}
-                {...formik.getFieldProps("acompanhante")}
-                value={formik.values.acompanhante ?? 0}
-              />
-            </Form.Group>
+          {/* Telefone */}
+          <Form.Group className="col-12 mb-1">
+            <Form.Label>Telefone</Form.Label>
+            <Form.Control
+              {...formik.getFieldProps("telefone")}
+              value={formik.values.telefone || ""}
+            />
+          </Form.Group>
 
-            {/* Mensagem */}
-            <Form.Group className="col-12 mb-1">
-              <Form.Label>Mensagem</Form.Label>
-              <Form.Control
-                as="textarea"
-                {...formik.getFieldProps("mensagem")}
-                value={formik.values.mensagem || ""}
-              />
-            </Form.Group>
+          {/* Acompanhantes */}
+          <Form.Group className="col-12 mb-1">
+            <Form.Label>Acompanhantes</Form.Label>
+            <Form.Control
+              type="number"
+              min={0}
+              max={5}
+              {...formik.getFieldProps("acompanhante")}
+              value={formik.values.acompanhante ?? 0}
+            />
+          </Form.Group>
 
-            {/* Botão de envio */}
-            <Form.Group className="col-12">
-              <Button type="submit" className="btn btn-primary">
-                Enviar
-              </Button>
-            </Form.Group>
-          </Form>
-        </div>
-      </article>
+          {/* Mensagem */}
+          <Form.Group className="col-12 mb-1">
+            <Form.Label>Mensagem</Form.Label>
+            <Form.Control
+              as="textarea"
+              {...formik.getFieldProps("mensagem")}
+              value={formik.values.mensagem || ""}
+            />
+          </Form.Group>
+
+          {/* Botão de envio */}
+          <Form.Group className="col-12">
+            <Button type="submit" className="btn btn-primary">
+              Enviar
+            </Button>
+          </Form.Group>
+        </Form>
+      </Container>
     </div>
   );
 }
