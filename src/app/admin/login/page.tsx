@@ -29,16 +29,11 @@ const Login = () => {
         router.push("/admin/dashboard"); // Redireciona após login
         return;
       }
-
-      // Caso não seja o admin predefinido, tenta autenticar pelo Firebase
-      const auth = getAuth();
-      await signInWithEmailAndPassword(auth, email, password);
-      localStorage.setItem("adminLoggedIn", "true");
-      router.push("/admin/dashboard");
-    } catch (err) {
-      setError("Email ou senha inválidos!");
+      // Add your login logic here
+    } catch {
+      setError("Login failed");
     } finally {
-      setIsLoading(false); // Desativa o estado de carregamento
+      setIsLoading(false);
     }
   };
 
