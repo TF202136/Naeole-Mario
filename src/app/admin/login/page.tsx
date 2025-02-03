@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Form, Button, Alert, Container } from "react-bootstrap";
-import styles from "../../../styles/Login.module.css"; // Importe o arquivo de estilos
+import styles from "../../../styles/Login.module.css";
 
-// Credenciais predefinidas
+// Predefined credentials from environment variables
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
 
@@ -15,37 +15,37 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false); // Estado para controlar o carregamento
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); // Ativa o estado de carregamento
-    setError(null); // Limpa erros anteriores
+    setIsLoading(true);
+    setError(null);
 
     try {
-      // Verifica se o e-mail e a senha correspondem às credenciais predefinidas
+      // Check if the email and password match the predefined admin credentials
       if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        localStorage.setItem("adminLoggedIn", "true"); // Salva sessão
-        router.push("/admin/dashboard"); // Redireciona após login
+        localStorage.setItem("adminLoggedIn", "true");
+        router.push("/admin/dashboard");
         return;
       }
 
-      // Autenticação com Firebase
+      // Otherwise, attempt Firebase authentication
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-
-      // Se a autenticação for bem-sucedida, redireciona para o dashboard
       localStorage.setItem("adminLoggedIn", "true");
       router.push("/admin/dashboard");
-    } catch (err) {
+    } catch (_) {
       setError("Email ou senha inválidos!");
     } finally {
-      setIsLoading(false); // Desativa o estado de carregamento
+      setIsLoading(false);
     }
   };
 
   return (
-    <Container className={`d-flex flex-column align-items-center justify-content-center vh-100 ${styles.loginContainer}`}>
+    <Container
+      className={`d-flex flex-column align-items-center justify-content-center vh-100 ${styles.loginContainer}`}
+    >
       <div className={styles.loginBox}>
         <h2 className={styles.loginTitle}>Admin Login</h2>
         {error && <Alert variant="danger" className={styles.alert}>{error}</Alert>}
@@ -73,7 +73,7 @@ const Login = () => {
           <Button
             type="submit"
             className={`w-100 ${styles.loginButton}`}
-            disabled={isLoading} // Desabilita o botão durante o carregamento
+            disabled={isLoading}
           >
             {isLoading ? "Carregando..." : "Login"}
           </Button>
