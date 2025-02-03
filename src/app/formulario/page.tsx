@@ -1,5 +1,3 @@
-// /src/app/formulario/page.tsx
-
 "use client";
 
 // Force dynamic rendering (disable prerendering)
@@ -12,30 +10,28 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useFormikValidation } from "../../hooks/useFormikValidation";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../lib/firebase/config";
+import { addDoc } from "firebase/firestore";
+import { convidadosRef } from "../../lib/firebase/config";
 import { Alert, Button, Container } from "react-bootstrap";
-
-// If Firestore is not initialized, throw an error
-if (!db) {
-  throw new Error("Firestore initialization failed");
-}
-const convidadosRef = collection(db, "convidados");
 
 function Formulario() {
   const [success, setSuccess] = useState(false);
 
   const formik = useFormikValidation(async (values, { resetForm }) => {
     try {
+      if (!convidadosRef) {
+        throw new Error("Firestore initialization failed");
+      }
+
       await addDoc(convidadosRef, {
         ...values,
-        acompanhante: values.acompanhante ?? 0, // Ensure a number is stored
+        acompanhante: values.acompanhante ?? 0, // Garantindo que sempre há um número
       });
 
       setSuccess(true);
-      resetForm(); // Reset the form fields
+      resetForm(); // Reseta o formulário
 
-      // Remove success alert after 3 seconds
+      // Remover alerta após 3 segundos
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
@@ -50,7 +46,7 @@ function Formulario() {
       <Container>
         {success && (
           <Alert variant="success">
-            Obrigado por confirmar a tua presença!
+            Convidado adicionado com sucesso!
           </Alert>
         )}
         <Form
