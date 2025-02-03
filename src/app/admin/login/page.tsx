@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Form, Button, Alert, Container } from "react-bootstrap";
-import styles from "../../../styles/Login.module.css"; //importe o arquivo de estilos
+import styles from "../../../styles/Login.module.css"; // Importe o arquivo de estilos
 
 // Credenciais predefinidas
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
+const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
 
 const Login = () => {
   const router = useRouter();
@@ -29,11 +29,18 @@ const Login = () => {
         router.push("/admin/dashboard"); // Redireciona após login
         return;
       }
-      // Add your login logic here
-    } catch {
-      setError("Login failed");
+
+      // Autenticação com Firebase
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // Se a autenticação for bem-sucedida, redireciona para o dashboard
+      localStorage.setItem("adminLoggedIn", "true");
+      router.push("/admin/dashboard");
+    } catch (err) {
+      setError("Email ou senha inválidos!");
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Desativa o estado de carregamento
     }
   };
 
