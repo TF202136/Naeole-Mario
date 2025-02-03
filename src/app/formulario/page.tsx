@@ -7,18 +7,12 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useFormikValidation } from "../../hooks/useFormikValidation";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
-import { app, db } from "../../lib/firebase/config";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../lib/firebase/config";
 import { Alert, Button, Container } from "react-bootstrap";
 
-if (!app) {
-  throw new Error("Firebase app initialization failed");
-}
-
-if (!db) {
-  throw new Error("Firestore initialization failed");
-}
-const convidadosRef = collection(db, "convidados");
+// Initialize the reference for the "convidados" collection
+const convidadosRef = collection(db!, "convidados");
 
 function Formulario() {
   const [success, setSuccess] = useState(false);
@@ -27,13 +21,10 @@ function Formulario() {
     try {
       await addDoc(convidadosRef, {
         ...values,
-        acompanhante: values.acompanhante ?? 0, // Garantindo que sempre há um número
+        acompanhante: values.acompanhante ?? 0, // Ensure a number is stored
       });
-
       setSuccess(true);
-      resetForm(); // Reseta o formulário
-
-      // Remover alerta após 3 segundos
+      resetForm(); // Reset the form fields
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
@@ -46,9 +37,16 @@ function Formulario() {
     <div>
       <Navigation />
       <Container>
-        {success && <Alert variant="success">Convidado adicionado com sucesso!</Alert>}
-        <Form onSubmit={formik.handleSubmit}>
-          {/* Nome e Sobrenome */}
+        {success && (
+          <Alert variant="success">
+            Obrigado por confirmar a tua presença!
+          </Alert>
+        )}
+        <Form
+          className="row g-3 shadow p-3 mb-5 bg-body-tertiary rounded"
+          onSubmit={formik.handleSubmit}
+        >
+          {/* Nome and Sobrenome */}
           <Form.Group className="col-12 mb-1">
             <Row>
               <Col>
@@ -111,7 +109,7 @@ function Formulario() {
             />
           </Form.Group>
 
-          {/* Botão de envio */}
+          {/* Submit Button */}
           <Form.Group className="col-12">
             <Button type="submit" className="btn btn-primary">
               Enviar
