@@ -35,7 +35,7 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       localStorage.setItem("adminLoggedIn", "true");
       router.push("/admin/dashboard");
-    } catch (_) {
+    } catch  {
       setError("Email ou senha inválidos!");
     } finally {
       setIsLoading(false);
