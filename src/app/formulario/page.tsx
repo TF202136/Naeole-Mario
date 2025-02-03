@@ -50,9 +50,16 @@ function Formulario() {
           </Alert>
         )}
         <Form
-          className="row g-3 shadow p-3 mb-5 bg-body-tertiary rounded"
+          className="row g-3 shadow p-3 mt-5 mb-5 bg-body-tertiary rounded"
           onSubmit={formik.handleSubmit}
         >
+        <div className="col-12 text-center">
+          <h1>Obrigado pela sua presença</h1>
+          <p>
+            Preencha o formulário abaixo para confirmar a sua presença no
+            casamento.
+          </p>
+        </div>
           {/* Nome and Sobrenome */}
           <Form.Group className="col-12 mb-1">
             <Row>
