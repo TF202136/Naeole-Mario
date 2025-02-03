@@ -14,6 +14,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    if (!auth) {
+      throw new Error("Firebase auth is not initialized");
+    }
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
@@ -21,6 +24,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const logout = async () => {
+    if (!auth) {
+      throw new Error("Firebase auth is not initialized");
+    }
     await signOut(auth);
   };
 
