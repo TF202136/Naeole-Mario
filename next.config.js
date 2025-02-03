@@ -1,23 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: "export",
   reactStrictMode: true,
   swcMinify: true,
   images: {
+    unoptimized: true, // ✅ Corrige o erro de otimização de imagens para exportação estática
     remotePatterns: [
       {
-        protocol: "https", // Usually 'https'
-        hostname: "firebasestorage.googleapis.com", // The domain
-        port: "", // Optional port number (usually empty)
-        pathname: "/**", // Match all paths under this domain (important!)
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+        port: "",
+        pathname: "/**",
       },
       {
         protocol: "https",
         hostname: "example.com",
         port: "",
-        pathname: "/**", // Match all paths
+        pathname: "/**",
       },
-      // Add more patterns as needed
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [320, 480, 768, 1024, 1600],
