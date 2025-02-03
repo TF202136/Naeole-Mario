@@ -16,27 +16,38 @@ import { Alert, Button, Container } from "react-bootstrap";
 
 function Formulario() {
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const formik = useFormikValidation(async (values, { resetForm }) => {
     try {
+      console.log("Enviando dados:", values);
+
+      // Verifica se a referência do Firestore está definida
       if (!convidadosRef) {
         throw new Error("Firestore initialization failed");
       }
 
+      // Adiciona os dados ao Firestore
       await addDoc(convidadosRef, {
         ...values,
         acompanhante: values.acompanhante ?? 0, // Garantindo que sempre há um número
+        createdAt: new Date().toISOString(), // Adiciona um timestamp para organização
       });
 
+      console.log("Dados enviados com sucesso!");
+
+      // Exibe o alerta de sucesso
       setSuccess(true);
+      setError(null); // Limpa qualquer erro anterior
       resetForm(); // Reseta o formulário
 
-      // Remover alerta após 3 segundos
+      // Remove o alerta após 3 segundos
       setTimeout(() => {
         setSuccess(false);
       }, 3000);
     } catch (error) {
       console.error("Erro ao salvar:", error);
+      setError("Erro ao enviar o formulário. Tente novamente."); // Exibe uma mensagem de erro
     }
   });
 
@@ -44,23 +55,31 @@ function Formulario() {
     <div>
       <Navigation />
       <Container>
+        {/* Alertas de sucesso e erro */}
         {success && (
-          <Alert variant="success">
-            Convidado adicionado com sucesso!
+          <Alert variant="success" className="text-center">
+            ✅ Formulário enviado com sucesso!
           </Alert>
         )}
+        {error && (
+          <Alert variant="danger" className="text-center">
+            ❌ {error}
+          </Alert>
+        )}
+
+        {/* Formulário */}
         <Form
           className="row g-3 shadow p-3 mt-5 mb-5 bg-body-tertiary rounded"
           onSubmit={formik.handleSubmit}
         >
-        <div className="col-12 text-center">
-          <h1>Obrigado pela sua presença</h1>
-          <p>
-            Preencha o formulário abaixo para confirmar a sua presença no
-            casamento.
-          </p>
-        </div>
-          {/* Nome and Sobrenome */}
+          <div className="col-12 text-center">
+            <h1>Obrigado pela sua presença</h1>
+            <p>
+              Preencha o formulário abaixo para confirmar a sua presença no casamento.
+            </p>
+          </div>
+
+          {/* Nome e Sobrenome */}
           <Form.Group className="col-12 mb-1">
             <Row>
               <Col>
@@ -68,14 +87,26 @@ function Formulario() {
                 <Form.Control
                   {...formik.getFieldProps("nome")}
                   value={formik.values.nome || ""}
+                  isInvalid={!!formik.errors.nome && formik.touched.nome}
                 />
+                {formik.touched.nome && formik.errors.nome && (
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.nome}
+                  </Form.Control.Feedback>
+                )}
               </Col>
               <Col>
                 <Form.Label>Sobrenome</Form.Label>
                 <Form.Control
                   {...formik.getFieldProps("sobrenome")}
                   value={formik.values.sobrenome || ""}
+                  isInvalid={!!formik.errors.sobrenome && formik.touched.sobrenome}
                 />
+                {formik.touched.sobrenome && formik.errors.sobrenome && (
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.sobrenome}
+                  </Form.Control.Feedback>
+                )}
               </Col>
             </Row>
           </Form.Group>
@@ -88,7 +119,13 @@ function Formulario() {
               <Form.Control
                 {...formik.getFieldProps("email")}
                 value={formik.values.email || ""}
+                isInvalid={!!formik.errors.email && formik.touched.email}
               />
+              {formik.touched.email && formik.errors.email && (
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.email}
+                </Form.Control.Feedback>
+              )}
             </InputGroup>
           </Form.Group>
 
@@ -98,7 +135,13 @@ function Formulario() {
             <Form.Control
               {...formik.getFieldProps("telefone")}
               value={formik.values.telefone || ""}
+              isInvalid={!!formik.errors.telefone && formik.touched.telefone}
             />
+            {formik.touched.telefone && formik.errors.telefone && (
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.telefone}
+              </Form.Control.Feedback>
+            )}
           </Form.Group>
 
           {/* Acompanhantes */}
@@ -110,7 +153,13 @@ function Formulario() {
               max={5}
               {...formik.getFieldProps("acompanhante")}
               value={formik.values.acompanhante ?? 0}
+              isInvalid={!!formik.errors.acompanhante && formik.touched.acompanhante}
             />
+            {formik.touched.acompanhante && formik.errors.acompanhante && (
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.acompanhante}
+              </Form.Control.Feedback>
+            )}
           </Form.Group>
 
           {/* Mensagem */}
@@ -123,7 +172,7 @@ function Formulario() {
             />
           </Form.Group>
 
-          {/* Submit Button */}
+          {/* Botão de Envio */}
           <Form.Group className="col-12">
             <Button type="submit" className="btn btn-primary">
               Enviar
