@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export', // ✅ Configura o Next.js para exportação estática
+  // swcMinify: true, // ✅ Ativa a minificação de código com SWC
   reactStrictMode: true, // ✅ Ativa o modo estrito do React
   images: {
     unoptimized: true, // ✅ Desativa a otimização de imagens para exportação estática

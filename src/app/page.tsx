@@ -1,4 +1,5 @@
 
+'use client';
 import Button from "react-bootstrap/Button";
 import "../styles/page.css";
 import Countdown from "./components/countdown/countdown";

@@ -2,7 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import styles from "../../../styles/countdown.module.css";
+import styles from "../../../styles/countdown.module.css";                                                                                       
 
 interface TimeLeft {
   days: number;
