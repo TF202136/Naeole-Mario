@@ -25,6 +25,7 @@
     "@next/font": "^14.2.15",
     "@types/react": "^19.0.8",
     "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.7",
     "firebase": "^11.2.0",
     "formik": "^2.4.6",
     "framer-motion": "^12.1.0",
