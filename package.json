@@ -27,6 +27,7 @@
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
     "firebase": "^11.2.0",
+    "firebase-tools": "^13.34.0",
     "formik": "^2.4.6",
     "framer-motion": "^12.1.0",
     "lucide-react": "^0.474.0",
